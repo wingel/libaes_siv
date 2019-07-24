@@ -546,7 +546,8 @@ int AES_SIV_Encrypt(AES_SIV_CTX *ctx, unsigned char *out, size_t *out_len,
         if (UNLIKELY(AES_SIV_Init(ctx, key, key_len) != 1)) {
                 return 0;
         }
-        if (UNLIKELY(AES_SIV_AssociateData(ctx, ad, ad_len) != 1)) {
+        if (ad != NULL &&
+            UNLIKELY(AES_SIV_AssociateData(ctx, ad, ad_len) != 1)) {
                 return 0;
         }
         if (nonce != NULL &&
@@ -578,7 +579,8 @@ int AES_SIV_Decrypt(AES_SIV_CTX *ctx, unsigned char *out, size_t *out_len,
         if (UNLIKELY(AES_SIV_Init(ctx, key, key_len) != 1)) {
                 return 0;
         }
-        if (UNLIKELY(AES_SIV_AssociateData(ctx, ad, ad_len) != 1)) {
+        if (ad != NULL &&
+            UNLIKELY(AES_SIV_AssociateData(ctx, ad, ad_len) != 1)) {
                 return 0;
         }
         if (nonce != NULL &&
